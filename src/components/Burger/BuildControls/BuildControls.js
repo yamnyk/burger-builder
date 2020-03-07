@@ -18,6 +18,7 @@ const BuildControls = props => {
           key={c + ind}
           label={c.type.charAt(0).toUpperCase() + c.type.slice(1)}
           added={() => props.ingredientAdded(c.type)}
+          removed={() => props.ingredientRemoved(c.type)}
         />
       ))}
     </div>
