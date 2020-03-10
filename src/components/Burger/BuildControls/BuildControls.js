@@ -19,6 +19,7 @@ const BuildControls = props => {
           label={c.type.charAt(0).toUpperCase() + c.type.slice(1)}
           added={() => props.ingredientAdded(c.type)}
           removed={() => props.ingredientRemoved(c.type)}
+          disabled={props.disabled[c.type]}
         />
       ))}
     </div>

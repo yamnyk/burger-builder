@@ -36,7 +36,7 @@ class BurgerBuilder extends Component {
   }
   
   removeIngredientHandler = (type) => {
-    if(this.state.ingredients[type] <= 0) return;
+    if (this.state.ingredients[type] <= 0) return;
     const oldAmount = this.state.ingredients[type],
       newAmount = oldAmount - 1,
       newIngredients = {
@@ -52,10 +52,17 @@ class BurgerBuilder extends Component {
   };
   
   render() {
+    const ingredients = {...this.state.ingredients};
+    Object.keys(ingredients).forEach(k => {
+      ingredients[k] = ingredients[k] <= 0
+    });
+    console.log(ingredients);
+    
     return (
       <>
         <Burger ingredients={this.state.ingredients}/>
         <BuildControls
+          disabled={ingredients}
           ingredientRemoved={this.removeIngredientHandler}
           ingredientAdded={this.addIngredientHandler}/>
       </>
