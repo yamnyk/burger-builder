@@ -15,7 +15,7 @@ const BuildControls = props => {
   
   return (
     <div className={styles.BuildControls}>
-      <p>Total price - {props.totalPrice.toFixed(2)}</p>
+      <p>Total price - {props.totalPrice}</p>
       {_CONTROLS.map((c, ind) => (
         <BuildControl
           key={c + ind}

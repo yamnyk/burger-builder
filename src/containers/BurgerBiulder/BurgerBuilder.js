@@ -65,7 +65,9 @@ class BurgerBuilder extends Component {
   };
   
   render() {
-    const ingredients = {...this.state.ingredients};
+    const ingredients = {...this.state.ingredients},
+      totalPrice = this.state.totalPrice.toFixed(2);
+    
     Object.keys(ingredients).forEach(k => {
       ingredients[k] = ingredients[k] <= 0
     });
@@ -79,6 +81,7 @@ class BurgerBuilder extends Component {
               ingredients={this.state.ingredients}
               cancel={this.toggleModalHandler}
               continue={this.orderHandler}
+              totalPrice={totalPrice}
             />
           </Modal>
           : null
@@ -88,7 +91,7 @@ class BurgerBuilder extends Component {
           disabled={ingredients}
           ingredientRemoved={this.removeIngredientHandler}
           ingredientAdded={this.addIngredientHandler}
-          totalPrice={this.state.totalPrice}
+          totalPrice={totalPrice}
           modalHandler={this.toggleModalHandler}
         />
       </>

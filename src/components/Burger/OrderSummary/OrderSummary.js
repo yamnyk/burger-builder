@@ -10,6 +10,7 @@ const OrderSummary = props => {
       <h3>Summary</h3>
       <p>Ingredients list:</p>
       {ingrList}
+      <p>Total price - {props.totalPrice}</p>
       <Button btnType={'Success'} clicked={props.continue}>continue</Button>
       <Button btnType={'Danger'} clicked={props.cancel}>cancel</Button>
     </>
