@@ -11,8 +11,11 @@ const _CONTROLS = Object.freeze([
 ]);
 
 const BuildControls = props => {
+  const purchasable = Object.keys(props.disabled).every(v => props.disabled[v] === true);
+  
   return (
     <div className={styles.BuildControls}>
+      <p>Total price - {props.totalPrice.toFixed(2)}</p>
       {_CONTROLS.map((c, ind) => (
         <BuildControl
           key={c + ind}
@@ -22,6 +25,7 @@ const BuildControls = props => {
           disabled={props.disabled[c.type]}
         />
       ))}
+      <button disabled={purchasable} className={styles.OrderButton} onClick={props.modalHandler}>order now</button>
     </div>
   );
 };

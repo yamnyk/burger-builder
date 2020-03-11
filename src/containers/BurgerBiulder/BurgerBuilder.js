@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 
 const _INGRENTS_COSTS = Object.freeze({
   salad: 0.5,
@@ -17,7 +19,8 @@ class BurgerBuilder extends Component {
       salad: 0,
       bacon: 0
     },
-    totalPrice: 4
+    totalPrice: 4,
+    toggleModal: false
   };
   
   addIngredientHandler = (type) => {
@@ -33,7 +36,7 @@ class BurgerBuilder extends Component {
       totalPrice: newPrice,
       ingredients: newIngredients
     })
-  }
+  };
   
   removeIngredientHandler = (type) => {
     if (this.state.ingredients[type] <= 0) return;
@@ -51,20 +54,35 @@ class BurgerBuilder extends Component {
     })
   };
   
+  toggleModalHandler = () => {
+    this.setState({
+      toggleModal: !this.state.toggleModal
+    })
+  };
+  
   render() {
     const ingredients = {...this.state.ingredients};
     Object.keys(ingredients).forEach(k => {
       ingredients[k] = ingredients[k] <= 0
     });
-    console.log(ingredients);
     
     return (
       <>
+        {
+          this.state.toggleModal ?
+          <Modal removeHandler={this.toggleModalHandler}>
+            <OrderSummary ingredients={this.state.ingredients}/>
+          </Modal>
+          : null
+        }
         <Burger ingredients={this.state.ingredients}/>
         <BuildControls
           disabled={ingredients}
           ingredientRemoved={this.removeIngredientHandler}
-          ingredientAdded={this.addIngredientHandler}/>
+          ingredientAdded={this.addIngredientHandler}
+          totalPrice={this.state.totalPrice}
+          modalHandler={this.toggleModalHandler}
+        />
       </>
     );
   }
