@@ -54,10 +54,14 @@ class BurgerBuilder extends Component {
     })
   };
   
-  toggleModalHandler = () => {
+  toggleModalHandler = (e) => {
     this.setState({
       toggleModal: !this.state.toggleModal
     })
+  };
+  
+  orderHandler = () => {
+    console.log('You continued');
   };
   
   render() {
@@ -71,7 +75,11 @@ class BurgerBuilder extends Component {
         {
           this.state.toggleModal ?
           <Modal removeHandler={this.toggleModalHandler}>
-            <OrderSummary ingredients={this.state.ingredients}/>
+            <OrderSummary
+              ingredients={this.state.ingredients}
+              cancel={this.toggleModalHandler}
+              continue={this.orderHandler}
+            />
           </Modal>
           : null
         }

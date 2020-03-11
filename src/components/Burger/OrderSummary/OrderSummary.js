@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from "../../UI/Button/Button";
 
 const OrderSummary = props => {
   const ingrList = Object.keys(props.ingredients)
@@ -9,6 +10,8 @@ const OrderSummary = props => {
       <h3>Summary</h3>
       <p>Ingredients list:</p>
       {ingrList}
+      <Button btnType={'Success'} clicked={props.continue}>continue</Button>
+      <Button btnType={'Danger'} clicked={props.cancel}>cancel</Button>
     </>
   );
 };
